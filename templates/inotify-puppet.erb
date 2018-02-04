@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# This file is managed by Puppet
+# Watches a files and executes a Puppet run on changes
+
+while inotifywait -e modify "$1"; do
+    puppet agent;
+done
