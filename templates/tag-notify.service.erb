@@ -1,10 +1,10 @@
 [Unit]
 Description=Watch facter file with inotify and execute Puppet run on change
-ConditionPathExists=<%= @facter_file %>
+ConditionPathExists=<%= @fact_file %>
 
 [Service]
 Type=simple
-ExecStart=<%= @inotify_script_path %> "<%= @facter_file %>"
+ExecStart=<%= @inotify_script_path %> "<%= @fact_file %>"
 RemainAfterExit=no
 
 [Install]

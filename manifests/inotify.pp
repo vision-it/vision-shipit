@@ -6,28 +6,33 @@
 # fact_file: Path the file to watch with inotify
 # service_name: Name of the systemd service to setup (Example: app-name-notify)
 #
-define inotify (
+define vision_shipit::inotify (
 
-  String $fact_file,
-  String $service_name,
+  String $fact                = $title,
+  String $service             = $title,
   String $inotify_script_path = '/usr/local/bin/inotify-puppet'
 
 ) {
 
   contain vision_shipit::script
 
-  $service_file = "/etc/systemd/system/${service_name}.service"
+  $service_file = "/etc/systemd/system/${service}.service"
+  $fact_file    = "/opt/puppetlabs/facter/facts.d/${fact}.txt"
 
   file { $service_file:
     ensure  => present,
     content => template('vision_shipit/tag-notify.service.erb'),
-    notify  => Service[$service_name],
+    notify  => Service[$service],
   }
 
-  service { $service_name:
-    ensure   => running,
-    enable   => true,
-    requires => [
+  file { $fact_file:
+    ensure  => present,
+  }
+
+  service { $service:
+    ensure  => running,
+    enable  => true,
+    require => [
       File[$service_file],
     ],
   }

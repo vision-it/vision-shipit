@@ -19,7 +19,7 @@ class vision_shipit::script (
 
   file { $inotify_script_path :
     ensure  => present,
-    content => template('vision_shipit/inotify-puppet')
+    content => template('vision_shipit/inotify-puppet.erb'),
     mode    => '0755',
   }
 

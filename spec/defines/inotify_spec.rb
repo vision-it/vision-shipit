@@ -7,6 +7,9 @@ describe 'vision_shipit::inotify' do
       let(:facts) do
         facts
       end
+
+      let(:title) { 'foobar' }
+
       # Default check to see if manifest compiles
       context 'compile' do
         it { is_expected.to compile.with_all_deps }
