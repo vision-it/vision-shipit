@@ -1,8 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
 # This file is managed by Puppet
 # Watches a files and executes a Puppet run on changes
 
-while inotifywait -e modify "$1"; do
-    puppet agent;
+FILE="$1"
+
+while inotifywait -e modify "$FILE"; do
+    /opt/puppetlabs/bin/puppet agent --no-daemonize --onetime;
+    EXIT_CODE=$?;
+    CONTENT="${FILE}: $(cat $FILE)"
+
+    case $EXIT_CODE in
+        0)
+            STATUS="run succeeded with no changes or failures; system was already in the desired state.";
+            ;;
+        1)
+            STATUS="run failed, or wasn't attempted due to another run already in progress.";
+            ;;
+        2)
+            STATUS="run succeeded, and some resources were changed.";
+            ;;
+        4)
+            STATUS="run succeeded, and some resources failed.";
+            ;;
+        6)
+            STATUS="run succeeded, and included both changes and failures.";
+            ;;
+        *)
+            STATUS="unknown puppet agent exit code $EXIT_CODE";
+            ;;
+    esac
+
+    <% if @mail_address %>
+    echo -e "${CONTENT}\n${STATUS}" | mail -s "Puppet Deploy" <%= @mail_address %>
+    <% end %>
+
+    <% if @verbose == true %>
+    echo -e "${CONTENT}\n${STATUS}"
+    <% end %>
+
 done

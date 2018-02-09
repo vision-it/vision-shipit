@@ -7,7 +7,9 @@
 
 class vision_shipit::script (
 
-  String $inotify_script_path = '/usr/local/bin/inotify-puppet'
+  String $inotify_script_path = '/usr/local/bin/inotify-puppet',
+  Optional[String] $mail_address = undef,
+  Boolean $verbose = false,
 
 ) {
 
