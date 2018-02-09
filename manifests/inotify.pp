@@ -10,7 +10,10 @@ define vision_shipit::inotify (
 
   String $fact                = $title,
   String $service             = $title,
-  String $inotify_script_path = '/usr/local/bin/inotify-puppet'
+  String $inotify_script_path = '/usr/local/bin/inotify-puppet',
+  String $owner               = 'root',
+  String $group               = 'root',
+  String $mode                = '0660',
 
 ) {
 
@@ -26,7 +29,10 @@ define vision_shipit::inotify (
   }
 
   file { $fact_file:
-    ensure  => present,
+    ensure => present,
+    owner  => $owner,
+    group  => $group,
+    mode   => $mode,
   }
 
   service { $service:
