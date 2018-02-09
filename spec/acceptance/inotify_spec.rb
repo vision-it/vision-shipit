@@ -5,6 +5,7 @@ describe 'vision_shipit' do
     it 'run idempotently' do
       pp = <<-FILE
         vision_shipit::inotify { 'foobar': }
+        vision_shipit::inotify { 'barfoo': }
       FILE
 
       apply_manifest(pp, catch_failures: true)
@@ -29,9 +30,16 @@ describe 'vision_shipit' do
     describe file('/opt/puppetlabs/facter/facts.d/foobar.txt') do
       it { is_expected.to exist }
     end
+    describe file('/opt/puppetlabs/facter/facts.d/barfoo.txt') do
+      it { is_expected.to exist }
+    end
     describe file('/etc/systemd/system/foobar.service') do
       it { is_expected.to exist }
       its(:content) { is_expected.to match 'foobar' }
+    end
+    describe file('/etc/systemd/system/barfoo.service') do
+      it { is_expected.to exist }
+      its(:content) { is_expected.to match 'barfoo' }
     end
   end
 end
