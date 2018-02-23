@@ -13,7 +13,7 @@ define vision_shipit::inotify (
   String $inotify_script_path = '/usr/local/bin/inotify-puppet',
   String $owner               = 'root',
   String $group               = 'root',
-  String $mode                = '0660',
+  String $mode                = '0664',
 
 ) {
 

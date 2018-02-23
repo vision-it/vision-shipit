@@ -36,13 +36,13 @@ describe 'vision_shipit' do
       it { is_expected.to exist }
       it { is_expected.to be_grouped_into('www-data') }
       it { is_expected.to be_owned_by('www-data') }
-      it { is_expected.to be_mode( 777 ) }
+      it { is_expected.to be_mode(777) }
     end
     describe file('/opt/puppetlabs/facter/facts.d/barfoo.txt') do
       it { is_expected.to exist }
       it { is_expected.to be_grouped_into('root') }
       it { is_expected.to be_owned_by('root') }
-      it { is_expected.to be_mode( 660 ) }
+      it { is_expected.to be_mode(664) }
     end
     describe file('/etc/systemd/system/foobar.service') do
       it { is_expected.to exist }
