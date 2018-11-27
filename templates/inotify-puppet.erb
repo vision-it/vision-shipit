@@ -32,7 +32,7 @@ while inotifywait -e modify "$FILE"; do
     esac
 
     <% if @mail_address %>
-    echo -e "${CONTENT}\n${STATUS}" | mail -s "Puppet Deploy" <%= @mail_address %>
+    echo -e "${CONTENT}\n${STATUS}" | mail -s "Puppet Deploy: $(basename $FILE)" <%= @mail_address %>
     <% end %>
 
     <% if @verbose == true %>
