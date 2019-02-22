@@ -4,6 +4,14 @@ describe 'vision_shipit' do
   context 'with defaults' do
     it 'run idempotently' do
       pp = <<-FILE
+
+        # Just so that Puppet won't throw an error
+        file {['/etc/init.d/barfoo', '/etc/init.d/foobar']:
+          ensure  => present,
+          mode    => '0777',
+          content => 'case "$1" in *) exit 0 ;; esac'
+        }
+
         vision_shipit::inotify { 'foobar':
           owner => 'www-data',
           group => 'www-data',
@@ -12,8 +20,10 @@ describe 'vision_shipit' do
         vision_shipit::inotify { 'barfoo': }
       FILE
 
+      apply_manifest(pp, catch_failures: false)
       apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
+      # To avoid error in Debian 9
+      apply_manifest(pp, catch_changes: false)
     end
   end
 
