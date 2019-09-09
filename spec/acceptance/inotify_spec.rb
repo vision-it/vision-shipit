@@ -38,7 +38,7 @@ describe 'vision_shipit' do
       it { is_expected.to be_owned_by('root') }
       its(:content) { is_expected.to match 'managed by Puppet' }
       its(:content) { is_expected.to match 'inotifywait' }
-      its(:content) { is_expected.to match 'puppet agent' }
+      its(:content) { is_expected.to match 'puppet apply' }
     end
   end
   context 'files' do

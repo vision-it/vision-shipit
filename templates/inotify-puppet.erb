@@ -6,7 +6,7 @@
 FILE="$1"
 
 while inotifywait -e modify "$FILE"; do
-    /opt/puppetlabs/bin/puppet agent --no-daemonize --onetime;
+    /opt/puppetlabs/bin/puppet apply --test /etc/puppetlabs/code/environments/production/manifests/site.pp;
     EXIT_CODE=$?;
     CONTENT="${FILE}: $(cat $FILE)"
 
@@ -32,7 +32,7 @@ while inotifywait -e modify "$FILE"; do
     esac
 
     <% if @mail_address %>
-    echo -e "${CONTENT}\n${STATUS}" | mail -s "Puppet Deploy: $(basename $FILE)" <%= @mail_address %>
+    echo -e "${CONTENT}\n${STATUS}" | mail -s "Puppet Deploy on $(hostname): $(basename $FILE)" <%= @mail_address %>
     <% end %>
 
     <% if @verbose == true %>
