@@ -1,2 +1,3 @@
 ---
-vision_shipit::param_test: 'Hello Testing'
+vision_shipit::user::uid: 12345
+vision_shipit::user::gid: 12345
