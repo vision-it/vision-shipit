@@ -33,13 +33,22 @@ class vision_shipit::user (
   }
 
   if ($public_key != undef) and ($key_type != undef) {
-    ssh_authorized_key { 'jenkins':
+    ssh_authorized_key { 'shipit':
       ensure  => present,
       user    => 'shipit',
       type    => $key_type,
       key     => $public_key,
       require => User['shipit'],
     }
+  }
+
+  # ensure legacy jenkins user and group are absent
+  user { 'jenkins':
+    ensure => absent,
+  }
+
+  group { 'jenkins':
+    ensure => absent,
   }
 
 }

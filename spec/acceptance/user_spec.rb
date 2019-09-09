@@ -22,5 +22,9 @@ describe 'vision_shipit::user' do
       it { is_expected.to have_uid 12_345 }
       it { is_expected.to belong_to_group 'docker' }
     end
+
+    describe user('jenkins') do
+      it { is_expected.not_to exist }
+    end
   end
 end
