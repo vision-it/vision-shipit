@@ -36,9 +36,10 @@ define vision_shipit::inotify (
   }
 
   service { $service:
-    ensure  => running,
-    enable  => true,
-    require => [
+    ensure   => running,
+    enable   => true,
+    provider => 'systemd',
+    require  => [
       File[$service_file],
     ],
   }
