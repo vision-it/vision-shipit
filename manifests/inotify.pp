@@ -21,6 +21,7 @@ define vision_shipit::inotify (
 
   $service_file = "/etc/systemd/system/${service}.service"
   $fact_file    = "/opt/puppetlabs/facter/facts.d/${fact}.txt"
+  $tag_file     = "/vision/data/${fact}.txt"
 
   file { $service_file:
     ensure  => present,
@@ -28,11 +29,19 @@ define vision_shipit::inotify (
     notify  => Service[$service],
   }
 
-  file { $fact_file:
+  file { $tag_file:
     ensure => present,
     owner  => $owner,
     group  => $group,
     mode   => $mode,
+  }
+
+  file { $fact_file:
+    ensure  => link,
+    target  => $tag_file,
+    require => [
+      File[$tag_file],
+    ],
   }
 
   service { $service:
