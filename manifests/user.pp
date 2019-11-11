@@ -10,10 +10,7 @@ class vision_shipit::user (
 
 ) {
 
-  require ::vision_docker
-
-  Class['::vision_docker']
-  ->group { 'shipit':
+  group { 'shipit':
     ensure => present,
     gid    => $gid,
   }
@@ -24,9 +21,6 @@ class vision_shipit::user (
     uid        => $uid,
     gid        => $gid,
     password   => '*',
-    groups     => [
-      'docker'
-    ],
     require    => [
       Group['shipit'],
     ]
