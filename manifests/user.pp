@@ -1,5 +1,15 @@
 # Class: vision_shipit::user
 # ===========================
+#
+# Manage user that will modify custom fact files
+#
+# Parameters
+# ----------
+# @param uid User's uid
+# @param gid User's gid
+# @param key_type User's SSH key type
+# @param public_key User's SSH public key
+#
 
 class vision_shipit::user (
 

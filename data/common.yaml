@@ -1,2 +1,2 @@
 ---
-vision_shipit::param: 'Hello World'
+vision_shipit::param: true

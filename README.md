@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/vision-it/vision-shipit.svg?branch=production)](https://travis-ci.org/vision-it/vision-shipit)
 
-## Parameter
-
 ## Usage
 
 Include in the *Puppetfile*:

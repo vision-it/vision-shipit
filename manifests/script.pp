@@ -1,8 +1,14 @@
 # Class: vision_shipit::script
 # ===========================
 #
+# To manage inotify script, which will then be used in systemd
+#
 # Parameters
 # ----------
+#
+# @param inotify_script_path Path to inotofy Script
+# @param mail_address Mail address to send notifications to
+# @param verbose Script verbosity
 #
 
 class vision_shipit::script (

@@ -1,11 +1,14 @@
-# Class: vision_shipit::inotify
+# Define: vision_shipit::inotify
 # ===========================
+#
+# Resource for inotify systemd config
 #
 # Parameters
 # ----------
-# fact_file: Path the file to watch with inotify
-# service_name: Name of the systemd service to setup (Example: app-name-notify)
+# @param fact Name of Puppet Fact. Will be used in directory path
+# @param service Name of the systemd service to setup (Example: app-name-notify)
 #
+
 define vision_shipit::inotify (
 
   String $fact                = $title,
