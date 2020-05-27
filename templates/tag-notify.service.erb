@@ -5,6 +5,9 @@ ConditionPathExists=<%= @fact_file %>
 [Service]
 Type=simple
 ExecStart=<%= @inotify_script_path %> "<%= @fact_file %>"
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectSystem=full
 RemainAfterExit=no
 
 [Install]
