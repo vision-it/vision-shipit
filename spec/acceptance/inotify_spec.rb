@@ -24,10 +24,8 @@ describe 'vision_shipit' do
         vision_shipit::inotify { 'barfoo': }
       FILE
 
+      # Systemd not functional
       apply_manifest(pp, catch_failures: false)
-      apply_manifest(pp, catch_failures: true)
-      # To avoid error in Debian 9
-      apply_manifest(pp, catch_changes: false)
     end
   end
 
